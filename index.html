@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VORTEX BET | Casa de Apuestas Deportivas</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Header principal -->
+  <header class="main-header">
+    <div class="header-left">
+      <div class="logo">
+        <span class="logo-badge">VB</span>
+        <span class="logo-title">VORTEX<span class="highlight">BET</span></span>
+      </div>
+      <nav class="top-nav">
+        <button class="nav-btn active" data-category="sports">Deportes</button>
+        <button class="nav-btn live-nav-btn" data-category="live">
+          <span class="live-dot"></span> EN VIVO
+        </button>
+        <button class="nav-btn" data-category="esports">eSports</button>
+        <button class="nav-btn" data-category="promos">Promociones</button>
+      </nav>
+    </div>
+
+    <div class="header-right">
+      <div class="wallet-card">
+        <span class="wallet-label">Saldo Ficticio</span>
+        <div class="wallet-balance">
+          <span class="currency">$</span>
+          <span id="user-balance">1,500.00</span>
+        </div>
+      </div>
+      <button class="btn btn-deposit" id="btn-deposit">+ Depositar</button>
+      <div class="user-pill">
+        <div class="user-avatar-initials">JD</div>
+        <span class="user-name">Juan D.</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Contenedor general en grid de 3 columnas -->
+  <div class="app-layout">
+    <!-- Barra lateral izquierda: Deportes y Ligas -->
+    <aside class="sidebar-left">
+      <div class="sidebar-section">
+        <h4 class="sidebar-heading">Principales Ligas</h4>
+        <ul class="nav-list" id="popular-leagues">
+          <li class="nav-item active" data-league="all">
+            <span class="bullet-icon">&#9733;</span> Todos los Eventos
+          </li>
+          <li class="nav-item" data-league="ucl">
+            <span class="bullet-icon">&#9670;</span> UEFA Champions League
+          </li>
+          <li class="nav-item" data-league="laliga">
+            <span class="bullet-icon">&#9670;</span> LaLiga Santander
+          </li>
+          <li class="nav-item" data-league="premier">
+            <span class="bullet-icon">&#9670;</span> Premier League
+          </li>
+          <li class="nav-item" data-league="nba">
+            <span class="bullet-icon">&#9670;</span> Baloncesto NBA
+          </li>
+          <li class="nav-item" data-league="atp">
+            <span class="bullet-icon">&#9670;</span> Tenis ATP Tour
+          </li>
+        </ul>
+      </div>
+
+      <div class="sidebar-section">
+        <h4 class="sidebar-heading">Deportes</h4>
+        <ul class="nav-list" id="sports-filter">
+          <li class="nav-item active" data-sport="all">
+            <span class="bullet-tag">ALL</span> Todos
+          </li>
+          <li class="nav-item" data-sport="football">
+            <span class="bullet-tag">FÚT</span> Fútbol
+          </li>
+          <li class="nav-item" data-sport="basketball">
+            <span class="bullet-tag">BAL</span> Baloncesto
+          </li>
+          <li class="nav-item" data-sport="tennis">
+            <span class="bullet-tag">TEN</span> Tenis
+          </li>
+          <li class="nav-item" data-sport="esports">
+            <span class="bullet-tag">ESP</span> eSports (CS:GO / LoL)
+          </li>
+          <li class="nav-item" data-sport="mma">
+            <span class="bullet-tag">MMA</span> MMA / UFC
+          </li>
+        </ul>
+      </div>
+
+      <!-- Widget de Juego Responsable -->
+      <div class="responsible-gambling-widget">
+        <div class="rg-badge">+18</div>
+        <p>Juega con responsabilidad. Apuesta únicamente por diversión.</p>
+        <a href="#rg-info" class="rg-link">Autoexclusión y Ayuda</a>
+      </div>
+    </aside>
+
+    <!-- Área Principal de Eventos -->
+    <main class="content-center">
+      <!-- Banner Promocional Tipográfico / Flat -->
+      <section class="hero-promo-banner">
+        <div class="promo-badge">PROMO DE LA SEMANA</div>
+        <h2>Bono de Bienvenida: Duplica tu primer depósito hasta $200</h2>
+        <p>Cuotas mejoradas en Champions League y apuestas combinadas sin riesgo los fines de semana.</p>
+        <div class="promo-actions">
+          <button class="btn btn-primary" id="claim-promo-btn">Activar Bono</button>
+          <span class="promo-terms">*Términos y condiciones aplican. Mayor de 18 años.</span>
+        </div>
+      </section>
+
+      <!-- Barra de Filtros y Búsqueda -->
+      <div class="filter-toolbar">
+        <div class="filter-tabs">
+          <button class="filter-tab active" data-filter="all">Todos los partidos</button>
+          <button class="filter-tab live-tab" data-filter="live">
+            <span class="live-dot"></span> En Vivo (<span id="live-count">0</span>)
+          </button>
+          <button class="filter-tab" data-filter="today">Hoy</button>
+          <button class="filter-tab" data-filter="weekend">Fin de semana</button>
+        </div>
+        <div class="search-box">
+          <input type="text" id="event-search" placeholder="Buscar equipo o competición...">
+        </div>
+      </div>
+
+      <!-- Sección de Eventos en Vivo -->
+      <section class="events-section" id="live-events-wrapper">
+        <div class="section-title-row">
+          <div class="title-with-pill">
+            <span class="live-pulse-badge">LIVE</span>
+            <h3>Eventos en Directo</h3>
+          </div>
+          <span class="section-subtitle">Cuotas dinámicas actualizadas en tiempo real</span>
+        </div>
+        <div class="events-grid" id="live-events-container">
+          <!-- Renderizado dinámico desde app.js -->
+        </div>
+      </section>
+
+      <!-- Sección de Próximos Partidos -->
+      <section class="events-section">
+        <div class="section-title-row">
+          <div class="title-with-pill">
+            <span class="upcoming-badge">&#128197;</span>
+            <h3>Próximos Encuentros Destacados</h3>
+          </div>
+          <div class="market-selector">
+            <label>Mercado:</label>
+            <select id="market-select">
+              <option value="1x2">1X2 (Ganador del Encuentro)</option>
+              <option value="overunder">Más/Menos de 2.5 Goles</option>
+              <option value="btts">Ambos Equipos Anotan</option>
+            </select>
+          </div>
+        </div>
+        <div class="events-grid" id="upcoming-events-container">
+          <!-- Renderizado dinámico desde app.js -->
+        </div>
+      </section>
+    </main>
+
+    <!-- Barra lateral derecha: Boleto de Apuestas (Bet Slip) -->
+    <aside class="sidebar-right">
+      <div class="betslip-card">
+        <div class="betslip-tabs">
+          <button class="slip-tab active" id="tab-betslip">Boleto (<span id="slip-count">0</span>)</button>
+          <button class="slip-tab" id="tab-mybets">Mis Apuestas (<span id="mybets-count">0</span>)</button>
+        </div>
+
+        <!-- Vista 1: Boleto de apuestas activas -->
+        <div class="slip-content" id="betslip-view">
+          <div class="slip-mode-toggle">
+            <button class="mode-btn active" id="btn-mode-simple">Simple</button>
+            <button class="mode-btn" id="btn-mode-parlay">Combinada</button>
+          </div>
+
+          <div class="slip-items-list" id="slip-items">
+            <!-- Items seleccionados -->
+            <div class="empty-slip">
+              <div class="empty-icon">[ &plus; ]</div>
+              <p>Tu boleto está vacío</p>
+              <span>Haz clic en cualquier cuota de un partido para añadirla al boleto</span>
+            </div>
+          </div>
+
+          <!-- Resumen de pago y cálculo -->
+          <div class="slip-footer" id="slip-footer" style="display: none;">
+            <div class="slip-summary-row">
+              <span>Cuota Total:</span>
+              <span class="slip-total-odds" id="slip-total-odds">1.00</span>
+            </div>
+
+            <div class="stake-input-group">
+              <label for="stake-amount">Importe de la apuesta ($):</label>
+              <div class="stake-input-wrapper">
+                <span class="currency-symbol">$</span>
+                <input type="number" id="stake-amount" value="10" min="1" step="1">
+              </div>
+              <div class="quick-stake-chips">
+                <button type="button" class="chip-btn" data-add="5">+5</button>
+                <button type="button" class="chip-btn" data-add="10">+10</button>
+                <button type="button" class="chip-btn" data-add="50">+50</button>
+                <button type="button" class="chip-btn" data-add="max">Máx</button>
+              </div>
+            </div>
+
+            <div class="potential-win-box">
+              <span class="win-label">Ganancia Potencial:</span>
+              <span class="win-val" id="potential-payout">$0.00</span>
+            </div>
+
+            <button class="btn btn-place-bet" id="btn-place-bet">Realizar Apuesta</button>
+            <button class="btn-clear-slip" id="btn-clear-slip">Vaciar boleto</button>
+          </div>
+        </div>
+
+        <!-- Vista 2: Historial de Mis Apuestas -->
+        <div class="slip-content" id="mybets-view" style="display: none;">
+          <div class="mybets-list" id="mybets-list">
+            <div class="empty-slip">
+              <p>No tienes apuestas registradas todavía.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Modal de Depósito Ficticio -->
+  <div class="modal-overlay" id="deposit-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Recargar Saldo de Prueba</h3>
+        <button class="modal-close" id="modal-close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p class="modal-desc">Simula un depósito instantáneo para probar apuestas simples y combinadas.</p>
+        <div class="deposit-options">
+          <button class="deposit-opt-btn" data-amount="50">+$50 USD</button>
+          <button class="deposit-opt-btn" data-amount="100">+$100 USD</button>
+          <button class="deposit-opt-btn active" data-amount="250">+$250 USD</button>
+          <button class="deposit-opt-btn" data-amount="500">+$500 USD</button>
+        </div>
+        <div class="deposit-custom">
+          <label>O introduce un importe personalizado:</label>
+          <input type="number" id="custom-deposit-input" placeholder="Ej: 300" min="5" value="250">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" id="btn-deposit-cancel">Cancelar</button>
+        <button class="btn btn-primary" id="btn-deposit-confirm">Confirmar Recarga</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Notificaciones Toast -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- Footer general con información legal y juego responsable -->
+  <footer class="main-footer">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <div class="logo">
+          <span class="logo-badge">VB</span>
+          <span class="logo-title">VORTEX<span class="highlight">BET</span></span>
+        </div>
+        <p class="footer-text">Plataforma demostrativa de apuestas deportivas sin imágenes, optimizada para rendimiento y experiencia de usuario fluida.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Deportes Principales</h5>
+        <ul>
+          <li>Fútbol Internacional</li>
+          <li>Baloncesto Profesional</li>
+          <li>Torneos de Tenis Grand Slam</li>
+          <li>Ligas de eSports</li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Información y Reglas</h5>
+        <ul>
+          <li>Reglas de Apuesta</li>
+          <li>Cálculo de Cuotas y Handicap</li>
+          <li>Tiempos de Resolución</li>
+          <li>Preguntas Frecuentes</li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Juego Responsable</h5>
+        <div class="footer-rg-box">
+          <span class="age-badge">+18</span>
+          <p>Las apuestas implican riesgo financiero. Juega con moderación. Este sitio web es una maqueta interactiva sin dinero real.</p>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 VORTEXBET Entertainment Inc. Todos los derechos reservados. Sin imágenes externas.</span>
+      <span>Diseñado con CSS moderno, tipografía y SVG puro.</span>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
